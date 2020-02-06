@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Name</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style>
+        #marker-map{
+            width:100%;
+            height:600px;
+            margin-top: 1rem;
+        }
+        .jumbotron{
+
+        	margin-top: 3rem;
+        	margin-right: 3rem;
+        	margin-left: 3rem;
+        	margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body>
+	<!-- As a heading -->
+	<nav class="navbar navbar-light bg-light">
+	  <span class="navbar-brand mb-0 h1">Home</span>
+	</nav>
+	<script type="text/javascript">
+		function fuelrem(){
+			var brate=document.getElementById("burnrate").value;
+			var gspeed=document.getElementById("speed").value;
+			var ftime=document.getElementById("flighttime").value;
+			var blockf=document.getElementById("blockfuel").value;
+			var faltitude=document.getElementById("altitude").value;
+			var fuelconsumption=brate*ftime;
+			var remainingfuel=blockf-fuelconsumption;
+			var tottime=blockf/brate;
+			var remtime=remainingfuel/brate;
+			var rg=gspeed*remtime;
+			document.getElementById("remfuel").innerHTML= remainingfuel;
+			document.getElementById("airrange").innerHTML= rg;
+		}
+	</script>
+	<script type="text/javascript">
+		
+	</script>
+	<div class="jumbotron">
+	  <h1 class="display-4"><center>Range Performance Calculator</center></h1>
+	  <form>
+		<div class="form-group">
+		  <label for="blockfuel"><b>Block Fuel</b></label>
+		  <input type="text" class="form-control" id="blockfuel" placeholder="Enter Block Fuel (in Kg)">
+		</div>
+		<div class="form-group">
+		  <label for="speed"><b>Ground Speed</b></label>
+		  <input type="text" class="form-control" id="speed" placeholder="Enter ground speed (in Knots)">
+		</div>
+		<div class="form-group">
+		  <label for="burnrate"><b>Burn Rate</b></label>
+		  <input type="text" class="form-control" id="burnrate" placeholder="Enter burn rate (in Kg/hr)">
+		</div>
+		<div class="form-group">
+		  <label for="flighttime"><b>Flight Time</b></label>
+		  <input type="text" class="form-control" id="flighttime" placeholder="Enter time flown (in hours)">
+		</div>
+		<div class="form-group">
+		  <label for="altitude"><b>Altitude</b></label>
+		  <input type="text" class="form-control" id="altitude" placeholder="Enter last known altitude (above MSL)">
+		</div>
+	   </form>
+	   <center><button class="btn btn-primary btn-lg" onclick="fuelrem()">Calculate</button></center>
+	   <div style="margin-bottom: 1em;"></div>
+	   <div class="row">
+	   <div class="col">
+	      <label><b>Remaining Fuel</b></label>
+		   	<div class="card-body">
+		   		<span id="remfuel"></span>
+		   		<span>Kilograms</span>
+		   	</div>
+	   </div>
+	   <div class="col">
+	      <label><b>Range</b></label>
+		   	<div class="card-body">
+		    	<span id="airrange"></span>
+		    	<span>NM</span>
+		   	</div>
+	   </div>
+	   </div>
+	</div>
+	<div class="jumbotron">
+	  <h1 class="display-4"><center>Aircraft Locator</center></h1>
+	  <form>
+		  <div class="form-group">
+		    <label for="latitudeval">Latitude</label>
+		    <input type="text" class="form-control" id="latitudeval" placeholder="Enter co-ordinate">
+		  </div>
+		  <div class="form-group">
+		    <label for="longitudeval">Longitude</label>
+		    <input type="text" class="form-control" id="longitudeval" placeholder="Enter co-ordinate">
+		  </div>
+	  </form>
+	  <center><button class="btn btn-primary btn-lg">Locate</button></center>
+	  <div id='marker-map' >
+	  	
+	  </div>
+	</div>
+</body>
+	<script>
+    // Initialize some map with center at Bucaramanga
+	function initMap(){
+	var map = new google.maps.Map(document.getElementById('marker-map'), {
+	    center: {
+	        lat: 7.119082288502541,
+	        lng: -73.120029012106
+	    },
+	    zoom: 11,
+	    mapTypeId: 'roadmap',
+
+	});
+
+
+	// An array with the coordinates of the boundaries of Bucaramanga, extracted manually from the GADM database
+	var BucaramangaDelimiters = [
+	    { lng: -73.077796936035,  lat: 7.18019914627087 },
+	    { lng: -73.0765991210938, lat: 7.17500114440924 },
+	    { lng: -73.0805969238281, lat: 7.16109991073608 },
+	    { lng: -73.081199645996,  lat: 7.14789915084839 },
+	    { lng: -73.0748977661132, lat: 7.13860082626343 },
+	    { lng: -73.0655975341797, lat: 7.13280010223394 },
+	    { lng: -73.0626983642578, lat: 7.12929916381836 },
+	    { lng: -73.0673980712889, lat: 7.1263999938966  },
+	    { lng: -73.0759963989258, lat: 7.10970115661621 },
+	    { lng: -73.084098815918,  lat: 7.10449981689459 },
+	    { lng: -73.0943984985352, lat: 7.09769916534424 },
+	    { lng: -73.1088027954102, lat: 7.08269977569586 },
+	    { lng: -73.1156997680664, lat: 7.07289981842052 },
+	    { lng: -73.1231994628906, lat: 7.07060003280645 },
+	    { lng: -73.1300964355469, lat: 7.05680179595953 },
+	    { lng: -73.1393966674804, lat: 7.05340003967291 },
+	    { lng: -73.1473999023437, lat: 7.05050086975098 },
+	    { lng: -73.152099609375,  lat: 7.05919981002808 },
+	    { lng: -73.1601028442383, lat: 7.06330013275158 },
+	    { lng: -73.1688003540039, lat: 7.06389999389648 },
+	    { lng: -73.1802978515624, lat: 7.06629991531383 },
+	    { lng: -73.1843032836913, lat: 7.07320117950451 },
+	    { lng: -73.1860961914062, lat: 7.08760023117071 },
+	    { lng: -73.1884002685546, lat: 7.1096010208131  },
+	    { lng: -73.1815032958984, lat: 7.12750101089489 },
+    	{ lng: -73.1780014038085, lat: 7.15230083465588 },
+	    { lng: -73.1781005859374, lat: 7.17660093307501 },
+	    { lng: -73.1763000488281, lat: 7.18930006027233 },
+	    { lng: -73.1770782470703, lat: 7.19456291198725 },
+	    { lng: -73.1682968139647, lat: 7.19389915466314 },
+	    { lng: -73.1636962890624, lat: 7.1995987892152  },
+	    { lng: -73.1591033935547, lat: 7.20250082016003 },
+	    { lng: -73.1452026367187, lat: 7.211100101471   },
+	    { lng: -73.1360015869141, lat: 7.21739912033081 },
+	    { lng: -73.1261978149414, lat: 7.22079992294312 },
+	    { lng: -73.1199035644531, lat: 7.22370100021362 },
+	    { lng: -73.1118011474609, lat: 7.2241997718811  },
+	    { lng: -73.1078033447265, lat: 7.22540187835699 },
+	    { lng: -73.1054992675781, lat: 7.22540187835699 },
+	    { lng: -73.1054992675781, lat: 7.22129917144787 },
+	    { lng: -73.1048965454102, lat: 7.21269989013683 },
+	    { lng: -73.1048965454102, lat: 7.20340108871466 },
+	    { lng: -73.1031036376953, lat: 7.19760084152222 },
+	    { lng: -73.0973968505859, lat: 7.1911988258363  },
+	    { lng: -73.0915985107421, lat: 7.18540000915522 },
+	    { lng: -73.0864028930664, lat: 7.18370008468634 },
+	    { lng: -73.077796936035,  lat: 7.18019914627087 }
+	];
+
+	// Construct the polygon.
+	var BucaramangaPolygon = new google.maps.Polygon({
+	    paths: BucaramangaDelimiters,
+	    strokeColor: '#FF0000',
+	    strokeOpacity: 0.8,
+	    strokeWeight: 3,
+	    fillColor: '#FF0000',
+	    fillOpacity: 0.35
+		});
+
+		// Draw the polygon on the desired map instance
+		BucaramangaPolygon.setMap(map); 
+		}
+    </script>
+    <script 
+     src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" >
+
+    </script>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</html>
