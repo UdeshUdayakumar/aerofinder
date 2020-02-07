@@ -35,13 +35,16 @@
 			var ftime=document.getElementById("flighttime").value;
 			var blockf=document.getElementById("blockfuel").value;
 			var faltitude=document.getElementById("altitude").value;
+			var grat=document.getelementById("gratio").value;
 			var fuelconsumption=brate*ftime;
 			var remainingfuel=blockf-fuelconsumption;
 			var tottime=blockf/brate;
 			var remtime=remainingfuel/brate;
+			var gd=faltitude/grat;
 			var rg=gspeed*remtime;
+			var vicinity=rg+gd;
 			document.getElementById("remfuel").innerHTML= remainingfuel;
-			document.getElementById("airrange").innerHTML= rg;
+			document.getElementById("airrange").innerHTML= vicinity;
 		}
 	</script>
 	<script type="text/javascript">
@@ -69,6 +72,10 @@
 		<div class="form-group">
 		  <label for="altitude"><b>Altitude</b></label>
 		  <input type="text" class="form-control" id="altitude" placeholder="Enter last known altitude (above MSL)">
+		</div>
+		<div class="form-group">
+		  <label for="gratio"><b>Glide Ratio</b></label>
+		  <input type="text" class="form-control" id="gratio" placeholder="Enter glide ratio of aircraft(in ft/NM)">
 		</div>
 	   </form>
 	   <center><button class="btn btn-primary btn-lg" onclick="fuelrem()">Calculate</button></center>
