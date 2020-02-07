@@ -42,9 +42,8 @@
 			var remtime=remainingfuel/brate;
 			var gd=faltitude/grat;
 			var rg=gspeed*remtime;
-			var vicinity=rg+gd;
 			document.getElementById("remfuel").innerHTML= remainingfuel;
-			document.getElementById("airrange").innerHTML= vicinity;
+			document.getElementById("airrange").innerHTML= rg+gd;
 		}
 	</script>
 	<script type="text/javascript">
