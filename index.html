@@ -40,7 +40,7 @@
 			var remainingfuel=blockf-fuelconsumption;
 			var tottime=blockf/brate;
 			var remtime=remainingfuel/brate;
-			var gd=1000*faltitude/grat;
+			var gd=grat*faltitude/1000;
 			var rg=gspeed*remtime;
 			document.getElementById("remfuel").innerHTML= remainingfuel;
 			document.getElementById("airrange").innerHTML= rg+gd;
