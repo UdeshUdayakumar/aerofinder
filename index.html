@@ -40,7 +40,7 @@
 			var remainingfuel=blockf-fuelconsumption;
 			var tottime=blockf/brate;
 			var remtime=remainingfuel/brate;
-			var gd=faltitude/grat;
+			var gd=1000*faltitude/grat;
 			var rg=gspeed*remtime;
 			document.getElementById("remfuel").innerHTML= remainingfuel;
 			document.getElementById("airrange").innerHTML= rg+gd;
@@ -74,7 +74,7 @@
 		</div>
 		<div class="form-group">
 		  <label for="gratio"><b>Glide Ratio</b></label>
-		  <input type="text" class="form-control" id="gratio" placeholder="Enter glide ratio of aircraft(in ft/NM)">
+		  <input type="text" class="form-control" id="gratio" placeholder="Enter glide distance of aircraft(per 1000ft)">
 		</div>
 	   </form>
 	   <center><button class="btn btn-primary btn-lg" onclick="fuelrem()">Calculate</button></center>
