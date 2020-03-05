@@ -44,11 +44,13 @@
 			var rg=gspeed*remtime;
 			if(remainingfuel > 0)
 			{
+				console.log(remainingfuel);
 				document.getElementById("remfuel").innerHTML= remainingfuel;
 				document.getElementById("airrange").innerHTML= rg+gd;
 			}
 			else
 			{
+				console.log(remainingfuel);
 				alert("Invalid Entry");
 			}
 		}
