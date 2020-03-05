@@ -42,7 +42,7 @@
 			var remtime=remainingfuel/brate;
 			var gd=grat*faltitude/1000;
 			var rg=gspeed*remtime;
-			if(gd>0 || rg>0 || remainingfuel>0)
+			if(remainingfuel > 0)
 			{
 				document.getElementById("remfuel").innerHTML= remainingfuel;
 				document.getElementById("airrange").innerHTML= rg+gd;
@@ -52,9 +52,6 @@
 				alert("Invalid Entry");
 			}
 		}
-	</script>
-	<script type="text/javascript">
-		
 	</script>
 	<div class="jumbotron">
 	  <h1 class="display-4"><center>Range Performance Calculator</center></h1>
