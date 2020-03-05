@@ -42,15 +42,13 @@
 			var remtime=remainingfuel/brate;
 			var gd=grat*faltitude/1000;
 			var rg=gspeed*remtime;
-			if(remainingfuel > 0)
+			if (remainingfuel > 0)
 			{
-				console.log(remainingfuel);
 				document.getElementById("remfuel").innerHTML= remainingfuel;
 				document.getElementById("airrange").innerHTML= rg+gd;
 			}
 			else
 			{
-				console.log(remainingfuel);
 				alert("Invalid Entry");
 			}
 		}
